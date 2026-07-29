@@ -1,63 +1,219 @@
 # Telegram Fleet Report Bot
 
-A Telegram bot for internal fleet operations. It reads operational data from Google Sheets, generates fleet status reports, and lets authorized users look up vehicle and driver information directly in Telegram.
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Aiogram](https://img.shields.io/badge/Aiogram-3.x-2CA5E0?style=for-the-badge)
+![Google Sheets](https://img.shields.io/badge/Google%20Sheets-API-34A853?style=for-the-badge&logo=googlesheets)
+![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)
 
-> Portfolio version: secrets, credentials, company data, and production identifiers are intentionally excluded.
+A production-oriented Telegram bot for fleet management and operational reporting.
 
-## Features
-- Consolidated fleet status reports from multiple worksheets
-- Driver lookup by registration plate
-- Vehicle, insurance, and company information lookup
-- Google Sheets based access control
-- Optional scheduled reports with APScheduler
-- Reply and inline keyboard navigation
+The application integrates with Google Sheets, generates real-time fleet reports, provides instant driver and vehicle lookup, and controls user access through a centralized permission system.
 
-## Architecture
+> **Portfolio version:** all credentials, company data and sensitive business information have been removed.
+
+---
+
+# Overview
+
+This project was developed to automate day-to-day fleet operations through Telegram.
+
+Managers can instantly:
+
+- generate operational fleet reports;
+- identify the active driver assigned to a vehicle;
+- retrieve vehicle and insurance information;
+- verify user permissions;
+- receive scheduled reports.
+
+The solution eliminates manual spreadsheet navigation and provides a fast interface for operational staff.
+
+---
+
+# Features
+
+- Fleet status reporting
+- Driver lookup by registration number
+- Vehicle information lookup
+- Google Sheets integration
+- Telegram Reply & Inline Keyboards
+- User access control
+- Scheduled reports
+- Modular architecture
+- Environment-based configuration
+
+---
+
+# Architecture
+
 ```text
-Telegram user -> aiogram handlers -> services -> Google Sheets
+                    Google Sheets
+                          │
+                          ▼
+                 Data Processing Layer
+                          │
+        ┌─────────────────┼─────────────────┐
+        ▼                 ▼                 ▼
+ Driver Lookup      Fleet Lookup      Report Builder
+        │                 │                 │
+        └─────────────────┼─────────────────┘
+                          ▼
+                 Telegram Bot (Aiogram)
+                          │
+                          ▼
+                        Users
 ```
 
-## Stack
-Python 3.11+, aiogram 3, gspread, Google Sheets API, APScheduler, python-dotenv
+---
 
-## Project structure
+# Technology Stack
+
+- Python 3
+- Aiogram 3
+- Google Sheets API
+- APScheduler
+- python-dotenv
+
+---
+
+# Project Structure
+
 ```text
-app/handlers      Telegram handlers
-app/services      Business logic and Google Sheets access
-app/config.py     Environment configuration
-app/scheduler.py  Optional scheduled report
-bot.py            Application entry point
+telegram-fleet-report-bot
+│
+├── app
+│   ├── handlers
+│   ├── services
+│   ├── config.py
+│   ├── keyboards.py
+│   ├── scheduler.py
+│   └── states.py
+│
+├── docs
+│
+├── bot.py
+├── requirements.txt
+├── README.md
+└── LICENSE
 ```
 
-## Google Sheets
-Expected worksheets: `CITI`, `Toyoty`, `rowery`, `skutery`, `flota`, a company sheet (`spółki`/variants), and `users`.
+---
 
-`users` format:
-```text
-telegram_id | role  | active
-123456789   | admin | TRUE
-```
+# Core Functionality
 
-## Install
+## Fleet Reporting
+
+Builds a consolidated operational report by collecting information from multiple Google Sheets and grouping vehicles by their current status.
+
+---
+
+## Driver Lookup
+
+Searches the active driver assigned to a registration plate.
+
+---
+
+## Fleet Information
+
+Displays structured information about:
+
+- vehicle;
+- insurance;
+- company details.
+
+---
+
+## Access Control
+
+Only users marked as active inside the authorization sheet are allowed to use the bot.
+
+---
+
+## Scheduled Reports
+
+Supports automatic report delivery using APScheduler.
+
+---
+
+# Installation
+
 ```bash
-python3 -m venv .venv
+git clone https://github.com/your_username/telegram-fleet-report-bot.git
+
+cd telegram-fleet-report-bot
+
+python -m venv .venv
+
 source .venv/bin/activate
+
 pip install -r requirements.txt
-cp .env.example .env
+```
+
+---
+
+# Configuration
+
+Create a `.env` file.
+
+```env
+BOT_TOKEN=your_bot_token
+
+GOOGLE_SHEET_KEY=your_google_sheet_key
+
+GOOGLE_CREDENTIALS_FILE=service_account.json
+```
+
+Share your Google Spreadsheet with the Google Service Account before running the application.
+
+---
+
+# Run
+
+```bash
 python bot.py
 ```
 
-On Windows PowerShell:
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-Copy-Item .env.example .env
-python bot.py
-```
+---
 
-## Security
-Never commit Telegram tokens, spreadsheet IDs, service-account JSON files, production exports, or real customer/company data.
+# Security
 
-## License
-MIT
+The public version intentionally excludes:
+
+- Telegram Bot Token
+- Google Service Account credentials
+- Production Google Sheets
+- Internal company information
+- Personal data
+- Customer records
+
+---
+
+# Future Improvements
+
+- PostgreSQL support
+- Docker deployment
+- REST API
+- Admin Dashboard
+- Unit Tests
+- GitHub Actions CI/CD
+
+---
+
+# Skills Demonstrated
+
+This repository demonstrates practical experience with:
+
+- Python backend development
+- Telegram bot development
+- Google Workspace integration
+- Business process automation
+- Report generation
+- Access management
+- Modular application architecture
+- Environment configuration
+- Clean project organization
+
+---
+
+# License
+
+This project is licensed under the MIT License.
