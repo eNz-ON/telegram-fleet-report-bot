@@ -144,7 +144,8 @@ Supports automatic report delivery using APScheduler.
 
 ![Driver Lookup](./driver.png)
 
----# Installation
+---
+# Installation
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/telegram-fleet-report-bot.git
