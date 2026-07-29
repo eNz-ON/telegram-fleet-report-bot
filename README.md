@@ -9,7 +9,7 @@ A production-oriented Telegram bot for fleet management and operational reportin
 
 The application integrates with Google Sheets, generates real-time fleet reports, provides instant driver and vehicle lookup, and controls user access through a centralized permission system.
 
-> **Portfolio version:** All credentials, company data and sensitive business information have been removed.
+> **Portfolio version:** All credentials, company data, and sensitive business information have been removed.
 
 ---
 
@@ -67,8 +67,8 @@ The solution eliminates manual spreadsheet navigation and provides a fast interf
 
 # Technology Stack
 
-- Python 3
-- Aiogram 3
+- Python 3.11+
+- Aiogram 3.x
 - Google Sheets API
 - APScheduler
 - python-dotenv
@@ -80,18 +80,20 @@ The solution eliminates manual spreadsheet navigation and provides a fast interf
 ```text
 telegram-fleet-report-bot
 │
-├── app
-│   ├── handlers
-│   ├── services
-│   ├── config.py
-│   ├── keyboards.py
-│   ├── scheduler.py
-│   └── states.py
-│
 ├── bot.py
+├── access.py
+├── config.py
+├── fleet.py
+├── google_sheets.py
+├── reports.py
 ├── requirements.txt
+├── example-data.csv
 ├── README.md
-└── LICENSE
+├── LICENSE
+├── start.png
+├── report.png
+├── flota.png
+└── driver.png
 ```
 
 ---
@@ -128,39 +130,33 @@ Supports automatic report delivery using APScheduler.
 
 ## Welcome
 
-<p align="center">
-  <img src="start.png" alt="Welcome Screen" width="850">
-</p>
+![Welcome](start.png)
 
 ## Report
 
-<p align="center">
-  <img src="report.png" alt="Fleet Report" width="850">
-</p>
+![Report](report.png)
 
 ## Fleet Lookup
 
-<p align="center">
-  <img src="flota.png" alt="Fleet Lookup" width="850">
-</p>
+![Fleet Lookup](flota.png)
 
 ## Driver Lookup
 
-<p align="center">
-  <img src="driver.png" alt="Driver Lookup" width="850">
-</p>
+![Driver Lookup](driver.png)
 
----
-
-# Installation
+---# Installation
 
 ```bash
-git clone https://github.com/your_username/telegram-fleet-report-bot.git
+git clone https://github.com/YOUR_USERNAME/telegram-fleet-report-bot.git
 
 cd telegram-fleet-report-bot
 
 python -m venv .venv
 
+# Windows
+.venv\Scripts\activate
+
+# Linux / macOS
 source .venv/bin/activate
 
 pip install -r requirements.txt
@@ -225,375 +221,8 @@ This repository demonstrates practical experience with:
 - Report generation
 - Access management
 - Modular application architecture
-- Environment configuration
-- Clean project organization
-
----
-
-# License
-
-This project is licensed under the MIT License.                          │
-                          ▼
-                 Data Processing Layer
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
- Driver Lookup      Fleet Lookup      Report Builder
-        │                 │                 │
-        └─────────────────┼─────────────────┘
-                          ▼
-                 Telegram Bot (Aiogram)
-                          │
-                          ▼
-                        Users
-```
-
----
-
-# Technology Stack
-
-- Python 3
-- Aiogram 3
-- Google Sheets API
-- APScheduler
-- python-dotenv
-
----
-
-# Project Structure
-
-```text
-telegram-fleet-report-bot
-│
-├── app
-│   ├── handlers
-│   ├── services
-│   ├── config.py
-│   ├── keyboards.py
-│   ├── scheduler.py
-│   └── states.py
-│
-├── bot.py
-├── requirements.txt
-├── README.md
-└── LICENSE
-```
-
----
-
-# Core Functionality
-
-## Fleet Reporting
-
-Builds a consolidated operational report by collecting information from multiple Google Sheets and grouping vehicles by their current status.
-
----
-
-## Driver Lookup
-
-Searches the active driver assigned to a registration plate.
-
----
-
-## Fleet Information
-
-Displays structured information about:
-
-- Vehicle
-- Insurance
-- Company details
-
----
-
-## Access Control
-
-Only users marked as active inside the authorization sheet are allowed to use the bot.
-
----
-
-## Scheduled Reports
-
-Supports automatic report delivery using APScheduler.
-
----
-
-# Screenshots
-
-## Welcome
-
-<p align="center">
-  <img src="start.png" width="850">
-</p>
-
----
-
-## Report
-
-<p align="center">
-  <img src="report.png" width="850">
-</p>
-
----
-
-## Fleet Lookup
-
-<p align="center">
-  <img src="flota.png" width="850">
-</p>
-
----
-
-## Driver Lookup
-
-<p align="center">
-  <img src="driver.png" width="850">
-</p>
-
----
-
-# Installation
-
-```bash
-git clone https://github.com/your_username/telegram-fleet-report-bot.git
-
-cd telegram-fleet-report-bot
-
-python -m venv .venv
-
-source .venv/bin/activate
-
-pip install -r requirements.txt
-```
-
----
-
-# Configuration
-
-Create a `.env` file.
-
-```env
-BOT_TOKEN=your_bot_token
-
-GOOGLE_SHEET_KEY=your_google_sheet_key
-
-GOOGLE_CREDENTIALS_FILE=service_account.json
-```
-
-Share your Google Spreadsheet with the Google Service Account before running the application.
-
----
-
-# Run
-
-```bash
-python bot.py
-```
-
----
-
-# Security
-
-The public version intentionally excludes:
-
-- Telegram Bot Token
-- Google Service Account credentials
-- Production Google Sheets
-- Internal company information
-- Personal data
-- Customer records
-
----
-
-# Future Improvements
-
-- PostgreSQL support
-- Docker deployment
-- REST API
-- Admin Dashboard
-- Unit Tests
-- GitHub Actions CI/CD
-
----
-
-# Skills Demonstrated
-
-This repository demonstrates practical experience with:
-
-- Python backend development
-- Telegram bot development
-- Google Workspace integration
-- Business process automation
-- Report generation
-- Access management
-- Modular application architecture
-- Environment configuration
-- Clean project organization
-
----
-
-# License
-
-This project is licensed under the MIT License.                 Data Processing Layer
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
- Driver Lookup      Fleet Lookup      Report Builder
-        │                 │                 │
-        └─────────────────┼─────────────────┘
-                          ▼
-                 Telegram Bot (Aiogram)
-                          │
-                          ▼
-                        Users
-```
-
----
-
-# Technology Stack
-
-- Python 3
-- Aiogram 3
-- Google Sheets API
-- APScheduler
-- python-dotenv
-
----
-
-# Project Structure
-
-```text
-telegram-fleet-report-bot
-│
-├── app
-│   ├── handlers
-│   ├── services
-│   ├── config.py
-│   ├── keyboards.py
-│   ├── scheduler.py
-│   └── states.py
-│
-├── docs
-│
-├── bot.py
-├── requirements.txt
-├── README.md
-└── LICENSE
-```
-
----
-
-# Core Functionality
-
-## Fleet Reporting
-
-Builds a consolidated operational report by collecting information from multiple Google Sheets and grouping vehicles by their current status.
-
----
-
-## Driver Lookup
-
-Searches the active driver assigned to a registration plate.
-
----
-
-## Fleet Information
-
-Displays structured information about:
-
-- vehicle;
-- insurance;
-- company details.
-
----
-
-## Access Control
-
-Only users marked as active inside the authorization sheet are allowed to use the bot.
-
----
-
-## Scheduled Reports
-
-Supports automatic report delivery using APScheduler.
-
----
-
-# Installation
-
-```bash
-git clone https://github.com/your_username/telegram-fleet-report-bot.git
-
-cd telegram-fleet-report-bot
-
-python -m venv .venv
-
-source .venv/bin/activate
-
-pip install -r requirements.txt
-```
-
----
-
-# Configuration
-
-Create a `.env` file.
-
-```env
-BOT_TOKEN=your_bot_token
-
-GOOGLE_SHEET_KEY=your_google_sheet_key
-
-GOOGLE_CREDENTIALS_FILE=service_account.json
-```
-
-Share your Google Spreadsheet with the Google Service Account before running the application.
-
----
-
-# Run
-
-```bash
-python bot.py
-```
-
----
-
-# Security
-
-The public version intentionally excludes:
-
-- Telegram Bot Token
-- Google Service Account credentials
-- Production Google Sheets
-- Internal company information
-- Personal data
-- Customer records
-
----
-
-# Future Improvements
-
-- PostgreSQL support
-- Docker deployment
-- REST API
-- Admin Dashboard
-- Unit Tests
-- GitHub Actions CI/CD
-
----
-
-# Skills Demonstrated
-
-This repository demonstrates practical experience with:
-
-- Python backend development
-- Telegram bot development
-- Google Workspace integration
-- Business process automation
-- Report generation
-- Access management
-- Modular application architecture
-- Environment configuration
+- Environment-based configuration
+- Google Sheets automation
 - Clean project organization
 
 ---
