@@ -126,6 +126,8 @@ Supports automatic report delivery using APScheduler.
 
 ---
 
+---
+
 # Screenshots
 
 ## Welcome
@@ -145,6 +147,7 @@ Supports automatic report delivery using APScheduler.
 ![Driver Lookup](./driver.png)
 
 ---
+
 # Installation
 
 ```bash
