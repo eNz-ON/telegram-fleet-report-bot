@@ -132,19 +132,19 @@ Supports automatic report delivery using APScheduler.
 
 ## Welcome
 
-![Welcome](./start.png)
+![Welcome](start.png)
 
 ## Report
 
-![Report](./report.png)
+![Report](report.png)
 
 ## Fleet Lookup
 
-![Fleet Lookup](./flota.png)
+![Fleet Lookup](flota.png)
 
 ## Driver Lookup
 
-![Driver Lookup](./driver.png)
+![Driver Lookup](driver.png)
 
 ---
 
